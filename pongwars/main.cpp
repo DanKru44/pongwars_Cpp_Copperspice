@@ -9,34 +9,18 @@ class GameWidget : public QWidget
 
     GameWidget( QWidget *parent = nullptr ) : QWidget( parent )
     {
-      setFixedSize( height , width ) ;
-
-      // coordinates of the balls
-      whiteBallX = width / 4 ;
-      whiteBallY =  height / 2 ;
-      blueBallX = width  * 0.75 ;
-      blueBallY = height / 2 ;
-
-      // method call to get a random angle
-      angle = getrandomangle() ;
-
-      // initialize the speed of the balls
-      // multiplying the Y-Component of the white ball with the sinus of the angle to get a random start direction
-      speedWhiteballX = 2 ;
-      speedWhiteBallY = 2 * std::cos( angle ) ;
-      speedBlueBallX = -speedWhiteballX ;
-      speedBlueBallY = -speedWhiteBallY ;
-
       // timer for the Animation speed
       // calling Method updateBalls to refresh the ball position
       // you can play with time to get faster or slower balls
       // changing the time can result in weird collison behaviour
       timer = new QTimer( this ) ;
       connect( timer , &QTimer::timeout , this , &GameWidget::updateBalls ) ;
-      timer -> start( 3 ) ;
+      timer -> stop(  ) ;
 
       // initializing the square colors with a method call
       initializeSquareColors() ;
+
+      initializeBalls() ;
     }
 
     void startAnimation()
@@ -47,6 +31,17 @@ class GameWidget : public QWidget
     void stopAnimation()
     {
       timer ->stop() ;
+    }
+
+    void resetAnimation()
+    {
+      
+      initializeSquareColors() ;
+
+      initializeBalls() ;
+
+      timer -> stop() ;
+      update() ;
     }
 
   private:
@@ -78,6 +73,20 @@ class GameWidget : public QWidget
       return static_cast< double > ( std::rand() ) / RAND_MAX * 2.0 * M_PI ;
     }
     
+    void initializeBalls()
+    {
+      whiteBallX = width / 4 ;
+      whiteBallY = height /2 ;
+      blueBallX = width * 0.75 ; 
+      blueBallY = height / 2 ;
+
+      angle = getrandomangle() ;
+      speedWhiteballX = 2 ;
+      speedWhiteBallY = 2 * std::cos( angle ) ;
+      speedBlueBallX = -speedWhiteballX ;
+      speedBlueBallY = -speedWhiteBallY ;
+    }
+
     // method to distribute the squarecolors depending on the spot in the window
     // first for-loop represents the left border of each square
     // second Loop the upper Border
@@ -261,11 +270,15 @@ class MainWindow : public QWidget
       QHBoxLayout *buttonLayout = new QHBoxLayout() ;
       QPushButton *startButton = new QPushButton ( "Start" ) ;
       QPushButton *stopButton = new QPushButton ( "Stop" ) ;
+      QPushButton *resetButton = new QPushButton( "Reset" ) ;
       buttonLayout -> addWidget( startButton ) ;
       buttonLayout -> addWidget( stopButton ) ;
+      buttonLayout -> addWidget( resetButton ) ;
 
       QObject::connect( startButton , &QPushButton::clicked , gameWidget , &GameWidget::startAnimation ) ;
       QObject::connect( stopButton , &QPushButton::clicked , gameWidget , &GameWidget::stopAnimation ) ;
+      QObject::connect( resetButton , &QPushButton::clicked , gameWidget , &GameWidget::resetAnimation ) ;
+
       mainLayout -> addLayout( buttonLayout ) ;
 
       setLayout( mainLayout ) ;
