@@ -1,7 +1,14 @@
 # pongwars-C-Copperspice
+This Project was created for my exam in the modul object orientated programming.
+
+I got the insperation from this Project: [vnglst/pong-wars](https://github.com/vnglst/pong-wars)
+He made the programm in JavaScript. 
+You find in his Repository some links to Alternate Versions of this programm from other developers. 
+
+
 
 ## Compilation
-I used ubuntu on the wsl to create this code and programm. 
+I used ubuntu inside the wsl to create this code and programm. 
 
 To compile this programm you need to follow these steps:
 
