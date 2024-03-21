@@ -13,7 +13,7 @@ Ubuntu-Version: 22.04
 The Copperspice Pre-Compiled Library i added are for this Version of Ubuntu.
 I do not know if it works on other Versions.
 
-I wrote the Code in the Texteditor [LunarVim](https://www.lunarvim.org/).
+I wrote the Code inside the  Texteditor [LunarVim](https://www.lunarvim.org/).
 
 
 ## Compilation
@@ -35,12 +35,12 @@ To compile this programm you need to follow these steps:
     cmake -DCMAKE_PREFIX_PATH=$CSLIB ..
     ```
 
-5.  Run cmake to build
+5.  Run cmake to build the project binary tree
     ```
     cmake --build . 
     ```
     
-6.  Run cmake to install 
+6.  Run cmake to install the programm into the deploy directory 
     ```
     cmake --install . --prefix=deploy
     ```
