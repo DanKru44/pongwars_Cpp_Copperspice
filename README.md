@@ -5,7 +5,7 @@ I got the insperation from this Project: [vnglst/pong-wars](https://github.com/v
 He made the programm in JavaScript. 
 You find in his Repository some links to Alternate Versions of this programm from other developers. 
 
-## build enviroment
+## Build Enviroment
 I develop this Project inside the wsl an Ubuntu
 
 Ubuntu-Version: 22.04
@@ -17,8 +17,6 @@ I wrote the Code in the Texteditor [LunarVim](https://www.lunarvim.org/).
 
 
 ## Compilation
-I used ubuntu inside the wsl to create this code and programm. 
-
 To compile this programm you need to follow these steps:
 
 1.  Export the CopperSpice-library root to a shell variable. 
