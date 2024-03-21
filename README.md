@@ -1,4 +1,4 @@
-# pongwars-C-Copperspice
+# pongwars_Cpp_Copperspice
 This Project was created for my exam in the modul object orientated programming.
 
 I got the insperation from this Project: [vnglst/pong-wars](https://github.com/vnglst/pong-wars)
