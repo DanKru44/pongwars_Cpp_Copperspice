@@ -3,11 +3,11 @@
 #include <cmath>
 #include <cstdlib>
 
-class MainWindow : public QWidget
+class GameWidget : public QWidget
 {
   public:
 
-    MainWindow() 
+    GameWidget( QWidget *parent = nullptr ) : QWidget( parent )
     {
       setFixedSize( height , width ) ;
 
@@ -32,11 +32,21 @@ class MainWindow : public QWidget
       // you can play with time to get faster or slower balls
       // changing the time can result in weird collison behaviour
       timer = new QTimer( this ) ;
-      connect( timer , &QTimer::timeout , this , &MainWindow::updateBalls ) ;
+      connect( timer , &QTimer::timeout , this , &GameWidget::updateBalls ) ;
       timer -> start( 3 ) ;
 
       // initializing the square colors with a method call
       initializeSquareColors() ;
+    }
+
+    void startAnimation()
+    {
+      timer -> start(3) ;
+    }
+
+    void stopAnimation()
+    {
+      timer ->stop() ;
     }
 
   private:
@@ -232,7 +242,35 @@ class MainWindow : public QWidget
       update() ;
     }
 
-  } ;
+} ;
+
+
+class MainWindow : public QWidget
+{
+
+  public:
+
+    MainWindow()
+    {
+      QVBoxLayout *mainLayout = new QVBoxLayout( this ) ;
+
+      GameWidget *gameWidget = new GameWidget( this ) ;
+      gameWidget -> setFixedSize( 800, 800 ) ;
+      mainLayout -> addWidget( gameWidget ) ;
+
+      QHBoxLayout *buttonLayout = new QHBoxLayout() ;
+      QPushButton *startButton = new QPushButton ( "Start" ) ;
+      QPushButton *stopButton = new QPushButton ( "Stop" ) ;
+      buttonLayout -> addWidget( startButton ) ;
+      buttonLayout -> addWidget( stopButton ) ;
+
+      QObject::connect( startButton , &QPushButton::clicked , gameWidget , &GameWidget::startAnimation ) ;
+      QObject::connect( stopButton , &QPushButton::clicked , gameWidget , &GameWidget::stopAnimation ) ;
+      mainLayout -> addLayout( buttonLayout ) ;
+
+      setLayout( mainLayout ) ;
+    }
+} ;
 
 int main( int argc , char *argv[] )
 {
