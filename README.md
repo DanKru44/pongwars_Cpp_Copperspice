@@ -1,10 +1,19 @@
 # pongwars_Cpp_Copperspice
 This Project was created for my exam in the modul object orientated programming.
 
-I got the insperation from this Project: [vnglst/pong-wars](https://github.com/vnglst/pong-wars)
+I got the insperation from this Project: [vnglst/pong-wars](https://github.com/vnglst/pong-wars).
 He made the programm in JavaScript. 
 You find in his Repository some links to Alternate Versions of this programm from other developers. 
 
+## build enviroment
+I develop this Project inside the wsl an Ubuntu
+
+Ubuntu-Version: 22.04
+
+The Copperspice Pre-Compiled Library i added are for this Version of Ubuntu.
+I do not know if it works on other Versions.
+
+I wrote the Code in the Texteditor [LunarVim](https://www.lunarvim.org/).
 
 
 ## Compilation
