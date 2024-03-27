@@ -2,12 +2,13 @@
 #include <QtCore>
 #include <cmath>
 #include <cstdlib>
+#include <iostream>
 
 class GameWidget : public QWidget
 {
   public:
 
-    GameWidget( QWidget *parent = nullptr ) : QWidget( parent )
+    GameWidget() 
     {
       // timer for the Animation speed
       // calling Method updateBalls to refresh the ball position
@@ -22,10 +23,10 @@ class GameWidget : public QWidget
 
       initializeBalls() ;
     }
-
+    
     void startAnimation()
     {
-      timer -> start(3) ;
+      timer -> start(20) ;
     }
 
     void stopAnimation()
@@ -83,8 +84,10 @@ class GameWidget : public QWidget
       angle = getrandomangle() ;
       speedWhiteballX = 2 ;
       speedWhiteBallY = 2 * std::cos( angle ) ;
-      speedBlueBallX = -speedWhiteballX ;
-      speedBlueBallY = -speedWhiteBallY ;
+
+      angle = getrandomangle() ;
+      speedBlueBallX = -2 ;
+      speedBlueBallY = 2 * std::cos( angle ) ;
     }
 
     // method to distribute the squarecolors depending on the spot in the window
@@ -235,36 +238,39 @@ class GameWidget : public QWidget
         }
       }
     }
-
+    
     // method to update the Ball Position
-    // calls the checkCollision MEthod to determine if a collision occurs
+    // calls the checkCollision Method to determine if a collision occurs
     // update() calls the paintEvent Method
     void updateBalls()
     {
-
       checkCollision( whiteBallX , whiteBallY , speedWhiteballX , speedWhiteBallY , Qt::white ) ;
       checkCollision( blueBallX , blueBallY , speedBlueBallX , speedBlueBallY , Qt::blue ) ;
       whiteBallX += speedWhiteballX ;
       whiteBallY += speedWhiteBallY ;
       blueBallX += speedBlueBallX ;
       blueBallY += speedBlueBallY ;
-      update() ;
+      update() ; //Vererbt aus QWidget
+    }
+
+    ~GameWidget()
+    {
+      std::cout << "GameWidget destruiert" << std::endl ;
     }
 
 } ;
-
 
 class MainWindow : public QWidget
 {
 
   public:
 
-    MainWindow()
+    MainWindow() // Konstruktor angucken
     {
-      QVBoxLayout *mainLayout = new QVBoxLayout( this ) ;
+      QVBoxLayout *mainLayout = new QVBoxLayout( this ) ; // new und this nochmal angucken
 
-      GameWidget *gameWidget = new GameWidget( this ) ;
-      gameWidget -> setFixedSize( 800, 800 ) ;
+      GameWidget *gameWidget = new GameWidget() ;
+      gameWidget -> setFixedSize( 800 , 800 ) ;
       mainLayout -> addWidget( gameWidget ) ;
 
       QHBoxLayout *buttonLayout = new QHBoxLayout() ;
@@ -283,6 +289,12 @@ class MainWindow : public QWidget
 
       setLayout( mainLayout ) ;
     }
+
+    ~MainWindow()
+    {
+      std::cout << "Fenster destruiert" << std::endl ; // Destruktor angucken
+    }
+
 } ;
 
 int main( int argc , char *argv[] )
