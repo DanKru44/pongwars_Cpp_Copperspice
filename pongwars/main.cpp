@@ -82,12 +82,12 @@ class GameWidget : public QWidget
       blueBallY = height / 2 ;
 
       angle = getrandomangle() ;
-      speedWhiteballX = 2 ;
-      speedWhiteBallY = 2 * std::cos( angle ) ;
+      speedWhiteballX = 4 ;
+      speedWhiteBallY = 4 * std::cos( angle ) ;
 
       angle = getrandomangle() ;
-      speedBlueBallX = -2 ;
-      speedBlueBallY = 2 * std::cos( angle ) ;
+      speedBlueBallX = -4 ;
+      speedBlueBallY = 4 * std::cos( angle ) ;
     }
 
     // method to distribute the squarecolors depending on the spot in the window
